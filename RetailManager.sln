@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMWPFUI", "RMWPFUI\RMWPFUI.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMDataManager.Library", "RMDataManager.Library\RMDataManager.Library.csproj", "{55086EF2-834B-4C7D-BDFB-0D88A425166A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMDesktopUI.Library", "RMDesctopUI.Library\RMDesktopUI.Library.csproj", "{E2E62231-4AB4-4421-9180-323DF2DCB8BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{55086EF2-834B-4C7D-BDFB-0D88A425166A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55086EF2-834B-4C7D-BDFB-0D88A425166A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55086EF2-834B-4C7D-BDFB-0D88A425166A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2E62231-4AB4-4421-9180-323DF2DCB8BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2E62231-4AB4-4421-9180-323DF2DCB8BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2E62231-4AB4-4421-9180-323DF2DCB8BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2E62231-4AB4-4421-9180-323DF2DCB8BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

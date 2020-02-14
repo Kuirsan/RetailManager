@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using RMDesktopUI.Library.Api;
 using RMWPFUI.Helpers;
 using System;
 using System.Collections.Generic;
@@ -64,6 +65,9 @@ namespace RMWPFUI.ViewModels
             try
             {
                 var result = await _apiHelper.Authenticate(UserName, Password);
+
+                // Capture more information bout user
+                await _apiHelper.GetLogedInUserInfo(result.Access_Token);
             }
             catch (Exception ex)
             {

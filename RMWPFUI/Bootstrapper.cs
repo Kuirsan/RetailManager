@@ -1,4 +1,6 @@
 ﻿using Caliburn.Micro;
+using RMDesktopUI.Library.Api;
+using RMDesktopUI.Library.Models;
 using RMWPFUI.Helpers;
 using RMWPFUI.ViewModels;
 using System;
@@ -28,6 +30,7 @@ namespace RMWPFUI
             _container
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>()
+                .Singleton<ILoggedInUserModel,LoggedInUserModel>()
                 .Singleton<IAPIHelper, APIHelper>();
 
             GetType().Assembly.GetTypes()
