@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using RMDesktopUI.Library.Api;
+using RMWPFUI.EventModels;
 using RMWPFUI.Helpers;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,12 @@ namespace RMWPFUI.ViewModels
         private string _userName;
         private string _password;
         private IAPIHelper _apiHelper;
+        private IEventAggregator _events;
 
-        public LoginViewModel(IAPIHelper aPIHelper)
+        public LoginViewModel(IAPIHelper aPIHelper, IEventAggregator events)
         {
             _apiHelper = aPIHelper;
+            _events = events;
         }
 
         public string UserName
@@ -68,6 +71,8 @@ namespace RMWPFUI.ViewModels
 
                 // Capture more information bout user
                 await _apiHelper.GetLogedInUserInfo(result.Access_Token);
+
+                _events.PublishOnUIThread(new LogOnEvent());
             }
             catch (Exception ex)
             {
