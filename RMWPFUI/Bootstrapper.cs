@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using RMDesctopUI.Library.Api;
 using RMDesktopUI.Library.Api;
 using RMDesktopUI.Library.Models;
 using RMWPFUI.Helpers;
@@ -26,7 +27,10 @@ namespace RMWPFUI
 
         protected override void Configure()
         {
-            _container.Instance(_container);
+            _container.Instance(_container)
+                .PerRequest<IProductEndpoint, ProductEndpoint>();
+
+
             _container
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>()
