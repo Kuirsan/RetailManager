@@ -51,11 +51,16 @@
         <!--Column2-->
         <TextBlock Text="Cart" Grid.Row="1" Grid.Column="2"/>
         <ListBox x:Name="Cart" Grid.Row="2" Grid.Column="2"
-                 MinHeight="200" MinWidth="150"/>
-
+                 MinHeight="200" MinWidth="150" >
+            <ListBox.ItemTemplate>
+            <DataTemplate>
+                <TextBlock Text="{Binding DisplayText}"/>
+            </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <DockPanel  Grid.Row="3" Grid.Column="2">
             <TextBlock  Text="Subtotal: " />
-            <TextBlock x:Name="Subtotal" Text="0.00"  TextAlignment="Right"/>
+            <TextBlock x:Name="SubTotal" Text="0.00"  TextAlignment="Right"/>
         </DockPanel>
 
         <DockPanel  Grid.Row="4" Grid.Column="2">

@@ -44,9 +44,23 @@ namespace RMWPFUI.ViewModels
             }
         }
 
-        private BindingList<ProductModel> _cart;
+        private ProductModel _selectedProduct;
 
-        public BindingList<ProductModel> Cart
+        public ProductModel SelectedProduct
+        {
+            get { return _selectedProduct; }
+            set
+            {
+                _selectedProduct = value;
+                NotifyOfPropertyChange(() => SelectedProduct);
+                NotifyOfPropertyChange(() => CanAddToCart);
+            }
+        }
+
+
+        private BindingList<CartItemModel> _cart = new BindingList<CartItemModel>();
+
+        public BindingList<CartItemModel> Cart
         {
             get { return _cart; }
             set
@@ -57,7 +71,7 @@ namespace RMWPFUI.ViewModels
         }
 
 
-        private int _itemQuantity;
+        private int _itemQuantity = 1;
 
         public int ItemQuantity
         {
@@ -66,6 +80,7 @@ namespace RMWPFUI.ViewModels
             {
                 _itemQuantity = value;
                 NotifyOfPropertyChange(() => ItemQuantity);
+                NotifyOfPropertyChange(() => CanAddToCart);
             }
         }
 
@@ -73,8 +88,12 @@ namespace RMWPFUI.ViewModels
         {
             get
             {
-                //TODO make calcalation
-                return "$0.00";
+                decimal subtotal = 0;
+                foreach (var item in Cart)
+                {
+                    subtotal += (item.Product.RetailPrice * item.QuantityInCart);
+                }
+                return subtotal.ToString("C");
             }
         }
 
@@ -104,7 +123,10 @@ namespace RMWPFUI.ViewModels
             {
                 bool result = false;
 
-
+                if (ItemQuantity>0 && SelectedProduct?.QuantityInStock>=ItemQuantity)
+                {
+                    result = true;
+                }
 
                 return result;
             }
@@ -112,7 +134,26 @@ namespace RMWPFUI.ViewModels
 
         public void AddToCart()
         {
-
+            CartItemModel existingItem = Cart.FirstOrDefault(x => x.Product == SelectedProduct);
+            if (existingItem!=null)
+            {
+                existingItem.QuantityInCart += ItemQuantity;
+                Cart.Remove(existingItem);
+                Cart.Add(existingItem);
+            }
+            else
+            {
+                CartItemModel item = new CartItemModel
+                {
+                    Product = SelectedProduct,
+                    QuantityInCart = ItemQuantity
+                };
+                Cart.Add(item);
+            }
+           
+            SelectedProduct.QuantityInStock -= ItemQuantity;
+            ItemQuantity = 1;
+            NotifyOfPropertyChange(() => SubTotal);
         }
 
         public bool CanRemoveFromCart
@@ -129,7 +170,7 @@ namespace RMWPFUI.ViewModels
 
         public void RemoveFromCart()
         {
-
+            NotifyOfPropertyChange(() => SubTotal);
         }
 
         public bool CanCheckOut
